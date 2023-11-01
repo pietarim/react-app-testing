@@ -96,7 +96,8 @@ const App = () => {
           setErrorMessage(null)
         }, 5000)
         const newBlogs = blogs.map(b => b.id !== newBlog.id ? b : { ...newBlog, likes: newBlog.likes + 1 })
-        setBlogs(newBlogs)
+        const sortedBlogs = newBlogs.sort((a, b) => b.likes - a.likes)
+        setBlogs(sortedBlogs)
       }
       )
       .catch(error => {

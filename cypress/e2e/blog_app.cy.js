@@ -70,7 +70,7 @@ describe('Blog app', function() {
     it('Cant delete blog if not creator', function() {
       cy.createUser()
       cy.login({ username: 'testi', password: 'testi' })
-      cy.createBlog({ title: '1likes', author: '1likes', url: '1likes' })
+      cy.createBlog({ title: '1likes', author: 'Author', url: 'www.internet.com' })
       cy.login({ username: 'Pietari Murtomaki', password: 'salis' })
       cy.contains('view').click()
       cy.contains('remove').should('not.exist')
@@ -80,13 +80,17 @@ describe('Blog app', function() {
       cy.createBlog({ title: 'alot', author: 'Tupu', url: 'www.url.fi', likes: 1 })
       cy.createBlog({ title: 'more', author: 'Hupu', url: 'www.url.fi', likes: 2 })
       cy.createBlog({ title: 'most', author: 'Lupu', url: 'www.url.fi', likes: 3 })
+      cy.get('#Hupu-view').click()
+      cy.wait(50)
+      cy.get('#Hupu-like').click()
+      cy.wait(50)
+      cy.get('#Hupu-like').click()
+      cy.wait(50)
       cy.get('.blog').then(blogs => {
-        cy.wrap(blogs[0]).contains('most')
-        cy.wrap(blogs[1]).contains('more')
+        cy.wrap(blogs[0]).contains('more')
+        cy.wrap(blogs[1]).contains('most')
         cy.wrap(blogs[2]).contains('alot')
       })
     })
   })
 })
-/* }) */
-

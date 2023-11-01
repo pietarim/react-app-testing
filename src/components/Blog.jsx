@@ -13,7 +13,13 @@ const Blog = ({ user, blog, handleRemove, handleLike }) => {
   if (!visible) {
     return (
       <div className='blog' style={{ border: 'solid 1px', margin: '2px', paddingLeft: '3px' }}>
-        <p style={{ marginBottom: '2px' }}>{blog.title} {blog.author}<button onClick={() => setVisible(true)}>view</button></p>
+        <p
+          style={{ marginBottom: '2px' }}
+        >
+          {blog.title} {blog.author}<button id={`${blog.author}-view`} onClick={() => setVisible(true)}>
+            view
+          </button>
+        </p>
       </div>
     )} else {
     return (
@@ -22,7 +28,7 @@ const Blog = ({ user, blog, handleRemove, handleLike }) => {
         <br />
         {blog.url}
         <br />
-        Likes: {blog.likes} <button onClick={() => handleLike(blog)}>like</button>
+        Likes: {blog.likes} <button id={`${blog.author}-like`} onClick={() => handleLike(blog)}>like</button>
         <br />
         Author: {blog.author}
         <button onClick={() => setVisible(false)}>hide</button>
